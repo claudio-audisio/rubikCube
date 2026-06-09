@@ -28,6 +28,12 @@ void processPOV() {
 	if (IsKeyDown(KEY_S))     dist  += 10.0f * GetFrameTime();
 	if (IsKeyDown(KEY_UP))	  height = std::min(height + 15.0f * GetFrameTime(), 8.0f);
 	if (IsKeyDown(KEY_DOWN))  height = std::max(height - 15.0f * GetFrameTime(), -8.0f);
+	if (IsKeyPressed(KEY_KP_7))	  cube.rotate(Yp_ROT, ROT_LEFT);
+	if (IsKeyPressed(KEY_KP_9))	  cube.rotate(Yp_ROT, ROT_RIGHT);
+	if (IsKeyPressed(KEY_KP_4))	  cube.rotate(Yo_ROT, ROT_LEFT);
+	if (IsKeyPressed(KEY_KP_6))	  cube.rotate(Yo_ROT, ROT_RIGHT);
+	if (IsKeyPressed(KEY_KP_1))	  cube.rotate(Ym_ROT, ROT_LEFT);
+	if (IsKeyPressed(KEY_KP_3))	  cube.rotate(Ym_ROT, ROT_RIGHT);
 
 	camera.position = {
 		sinf(orbit) * dist,
@@ -136,7 +142,7 @@ void drawVertexSpheres() {
 }
 
 int main() {
-	InitWindow(1600, 1200, "cube + Camera3D");
+	InitWindow(1600, 1200, "rubik's cube");
 	SetTargetFPS(60);
 	cube.init();
 
@@ -160,6 +166,10 @@ int main() {
 		DrawFPS(10, 10);
 		DrawText("arrows = orbit  |  W/S = zoom", 10, 30, 18, DARKGRAY);
 		DrawText(std::format("{:.2f}   {:.2f}   {:.2f}", camera.position.x, camera.position.y, camera.position.z).c_str(), 10, 50, 18, DARKGRAY);
+
+		if (cube.isSolved()) {
+			DrawText("SOLVED !", 730, 100, 30, DARKPURPLE);
+		}
 
 		EndDrawing();
 	}

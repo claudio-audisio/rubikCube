@@ -26,3 +26,9 @@
 #define Xp_ROT		6
 #define Yp_ROT		7
 #define Zp_ROT		8
+
+#define ROT_UP		0
+#define ROT_DOWN	1
+#define ROT_LEFT	2
+#define ROT_RIGHT	3
+
